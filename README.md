@@ -1,9 +1,9 @@
-# cljx-random
+# cljx-sampling
 
 A Clojure/ClojureScript library that provides consistent sampling and
 random number generation.  This means that given the same intial seed
-the same set of sampled items or the same set of random numbers will
-be produced whether using this library on the JVM or in the browser.
+the same results (sampled items or random numbers) will be produced
+using this library either on the JVM or in the browser.
 
 ## Usage
 
