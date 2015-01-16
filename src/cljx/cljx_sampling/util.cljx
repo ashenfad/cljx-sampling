@@ -1,5 +1,9 @@
 ;; Adapted from:
 ;; https://github.com/bigmlcom/sampling/blob/master/src/bigml/sampling/util.clj
+;; ----------------------------------------------
+;; Copyright 2013, 2014, 2015 BigML
+;; Licensed under the Apache License, Version 2.0
+;; http://www.apache.org/licenses/LICENSE-2.0
 
 (ns cljx-sampling.util)
 

@@ -1,10 +1,14 @@
 ;; Adapted from:
 ;; https://github.com/bigmlcom/sampling/blob/master/src/bigml/sampling/simple.clj
+;; ----------------------------------------------
+;; Copyright 2013, 2014, 2015 BigML
+;; Licensed under the Apache License, Version 2.0
+;; http://www.apache.org/licenses/LICENSE-2.0
 
 (ns cljx-sampling.core
-  "Provides simple random sampling. The original population is kept in
-   memory but the resulting sample set is produced as a lazy
-   sequence."
+  "Provides in-memory random sampling over collections. The original
+   population is kept in memory but the resulting sample set is
+   produced as a lazy sequence."
   (:require [cljx-sampling.random :as random]
             [cljx-sampling.util :as util]))
 

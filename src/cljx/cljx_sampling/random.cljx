@@ -1,5 +1,6 @@
 (ns cljx-sampling.random
-  "Provides a seedable random number generator using a 32 bit Xorshift."
+  "Provides a seedable random number generator using a 32 bit Xorshift.
+   http://www.jstatsoft.org/v08/i14/paper"
   #+clj (:import (sampling Bits)))
 
 (def ^:private unsigned-int-range (Math/pow 2 32))
@@ -19,11 +20,11 @@
   #+clj (Bits/xor v1 v2)
   #+cljs (bit-xor v1 v2))
 
-(defn- xor-shift [v]
-  (let [v (xor v (shift-left v 13))
-        v (xor v (unsigned-shift-right v 17))
-        v (xor v (shift-left v 5))]
-    v))
+(defn xor-shift [v]
+  (as-> v v
+    (xor v (shift-left v 13))
+    (xor v (unsigned-shift-right v 17))
+    (xor v (shift-left v 5))))
 
 (defn- next! [rng bits]
   (swap! rng xor-shift)
@@ -34,6 +35,7 @@
    value of the given seed is hashed and used as the final seed."
   [& [seed]]
   (atom (if seed
+          ;; CLJ and CLJS will hash strings to the same value
           (hash (str seed))
           (rand-int signed-int-range))))
 
@@ -44,8 +46,8 @@
 
 (defn next-int!
   "Generates an integer from [0, 2^32) given a random number
-   generator, or [0, max-range) an optional max range.  Note that on
-   the JVM this fn will return a long type."
+   generator, or [0, max-range) with an optional max range.  Note that
+   on the JVM this fn will return a Long."
   ([rng]
    (-> (next! rng 32) #+clj (bit-and 0xffffffff)))
   ([rng max-range]
@@ -53,7 +55,7 @@
 
 (defn next-double!
   "Generates a double from [0,1) given a random number generator, or
-   [0, max-range) given an optional max-range."
+   [0, max-range) with an optional max-range."
   ([rng]
    (/ (next-int! rng) unsigned-int-range))
   ([rng max-range]
@@ -65,6 +67,7 @@
    deviation (default 1)."
   [rng & [mean std-dev]]
   ;; Uses the Marsaglia polar method, but returns only one sample.
+  ;; http://en.wikipedia.org/wiki/Marsaglia_polar_method
   (let [x (dec (next-double! rng 2))
         y (dec (next-double! rng 2))
         s (+ (* x x) (* y y))]
