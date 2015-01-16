@@ -17,7 +17,9 @@ For [Leiningen](https://github.com/technomancy/leiningen):
 
 ## Overview
 
-This library offers seedable [random number generation](#random-number-generation) and [in-memory sampling](#sampling) over collections (borrowing from
+This library has two useful namespaces:
+  - [`cljx-sampling.random`](#random-number-generation) : Offers seedable random number generation
+  - [`cljx.sampling.core`](#sampling) : In-memory sampling over collections (borrows from
 [bigml/sampling](https://github.com/bigmlcom/sampling#simple-sampling)).
 
 As we review each, feel free to follow along in the REPL:
