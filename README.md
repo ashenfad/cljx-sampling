@@ -9,16 +9,15 @@ browser.
 ## Installation
 
 `cljx-sampling` is available as a Maven artifact from
-[Clojars](http://clojars.org/ashenfad/cljx-sampling).
+[Clojars](https://clojars.org/cljx-sampling).
 
 For [Leiningen](https://github.com/technomancy/leiningen):
 
-[![Clojars Project](http://clojars.org/ashenfad/cljx-sampling/latest-version.svg)](http://clojars.org/ashenfad/cljx-sampling)
+[![Clojars Project](http://clojars.org/cljx-sampling/latest-version.svg)](http://clojars.org/cljx-sampling)
 
 ## Overview
 
-This library offers seedable random number generation and in-memory
-sampling over collections (borrowing from
+This library offers seedable [random number generation](#random-number-generation) and [in-memory sampling](#sampling) over collections (borrowing from
 [bigml/sampling](https://github.com/bigmlcom/sampling#simple-sampling)).
 
 As we review each, feel free to follow along in the REPL:
@@ -36,17 +35,17 @@ While this random number generator is surprisingly strong for its
 simplicity, it is not cryptographically secure.
 
 To use, simply `create` a random number generator and then call
-`next-boolean!`, `next-int!`, `next-double!`, and `next-gaussian!` as
+`next-boolean!`, `next-int!`, `next-double!`, or `next-gaussian!` as
 needed.
 
 ```clojure
 demo> (def rng (random/create))
 demo> (random/next-boolean! rng)
-;; true
+true
 demo> (random/next-int! rng)
-;; 3321045053
+3321045053
 demo> (random/next-int! rng 8)
-;; 4
+4
 demo> (random/next-double! rng)
 0.5436311555095017
 demo> (random/next-double! rng 10)
@@ -116,7 +115,7 @@ demo> (sample (range 5) :seed "foobar")
 (2 1 0 4 3)
 ```
 
-### Weighted Simple Sampling
+### Weighted Sampling
 
 A sample may be weighted using the `:weigh` parameter. If the
 parameter is supplied with a function that takes an item and produces
