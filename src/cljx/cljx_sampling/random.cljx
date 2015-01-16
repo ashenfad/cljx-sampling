@@ -20,7 +20,7 @@
   #+clj (Bits/xor v1 v2)
   #+cljs (bit-xor v1 v2))
 
-(defn xor-shift [v]
+(defn- xor-shift [v]
   (as-> v v
     (xor v (shift-left v 13))
     (xor v (unsigned-shift-right v 17))
