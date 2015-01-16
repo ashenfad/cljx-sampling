@@ -41,7 +41,5 @@
                    :auto-clean false
                    :aliases {"cleantest" ["do" "clean," "cljx" "once," "test,"
                                           "cljsbuild" "test"]
-                             "deploy" ["do" "clean," "cljx" "once,"
-                                       "deploy" "clojars"]
                              "lint" ["do" "check," "eastwood"]
                              "distcheck" ["do" "clean," "lint," "cleantest"]}}})
