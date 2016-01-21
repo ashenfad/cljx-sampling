@@ -1,7 +1,6 @@
 (ns cljx-sampling.random
   "Provides a seedable random number generator using a 32 bit Xorshift.
-   http://www.jstatsoft.org/v08/i14/paper"
-  #+clj (:import (sampling Bits)))
+   http://www.jstatsoft.org/v08/i14/paper")
 
 (def ^:private unsigned-int-range (Math/pow 2 32))
 (def ^:private signed-int-range (Math/pow 2 31))
@@ -9,26 +8,17 @@
 (declare next-double!)
 
 (defn- shift-left [v pos]
-  #+clj (Bits/shiftLeft v pos)
-  #+cljs (bit-shift-left v pos))
-
-(defn- unsigned-shift-right [v pos]
-  #+clj (Bits/unsignedShiftRight v pos)
-  #+cljs (unsigned-bit-shift-right v pos))
-
-(defn- xor [v1 v2]
-  #+clj (Bits/xor v1 v2)
-  #+cljs (bit-xor v1 v2))
+  (-> (bit-shift-left v pos) #+clj (bit-and 0xffffffff)))
 
 (defn- xor-shift [v]
   (as-> v v
-    (xor v (shift-left v 13))
-    (xor v (unsigned-shift-right v 17))
-    (xor v (shift-left v 5))))
+    (bit-xor v (shift-left v 13))
+    (bit-xor v (unsigned-bit-shift-right v 17))
+    (bit-xor v (shift-left v 5))))
 
 (defn- next! [rng bits]
   (swap! rng xor-shift)
-  (unsigned-shift-right @rng (- 32 bits)))
+  (unsigned-bit-shift-right @rng (- 32 bits)))
 
 (defn create
   "Creates a random number generator with an optional seed.  The 'str'
