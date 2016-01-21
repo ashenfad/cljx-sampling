@@ -39,7 +39,7 @@
    generator, or [0, max-range) with an optional max range.  Note that
    on the JVM this fn will return a Long."
   ([rng]
-   (-> (next! rng 32) #+clj (bit-and 0xffffffff)))
+   (next! rng 32))
   ([rng max-range]
    (#+clj long #+cljs int (* max-range (next-double! rng)))))
 
