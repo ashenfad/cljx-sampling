@@ -74,10 +74,8 @@ demo> (repeatedly 10 #(random/next-int! rng2 100))
 collections. While the original population is kept in memory, the
 resulting sample is a lazy sequence.
 
-By default, sampling is done [without replacement]
-(http://www.ma.utexas.edu/users/parker/sampling/repl.htm). This
-is equivalent to a lazy [Fisher-Yates shuffle]
-(http://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle).
+By default, sampling is done [without replacement](http://www.ma.utexas.edu/users/parker/sampling/repl.htm). This
+is equivalent to a lazy [Fisher-Yates shuffle](http://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle).
 
 ```clojure
 demo> (sample (range 5))
@@ -144,6 +142,6 @@ demo> (->> (sample [:heads :tails]
 
 ## License
 
-Copyright (C) 2014, 2015 - Adam Ashenfelter
+Copyright (C) 2014-2017 - Adam Ashenfelter
 
 Distributed under the Apache License, Version 2.0.
